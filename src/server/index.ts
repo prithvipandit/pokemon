@@ -35,6 +35,9 @@ export const appRouter = router({
     getAllPokemons: publicProcedure.query(async()=>{
         try{
             console.log("#process.env.VERCEL_URL : ",process.env.VERCEL_URL);
+            for (let key in process.env) {
+                console.log(`${key}: ${process.env[key]}`);
+            }
             const res :Pokemon[] = await prisma.pokemon.findMany();
             const pokemons: ResponseData= { pokemons : res};
             return pokemons;

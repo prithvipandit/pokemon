@@ -44,9 +44,7 @@ export default function MyList(): React.JSX.Element {
 
       console.log("DB URL :: ",process.env.DATABASE_URL,process.env.VERCEL_URL );
 
-      for (let key in process.env) {
-        console.log(`${key}: ${process.env[key]}`);
-      }
+      
     
     },[]);
 
