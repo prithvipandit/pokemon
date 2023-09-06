@@ -4,7 +4,7 @@ import { Paper, Container, Typography, Table, TableHead,TableRow, TableBody,Tabl
 import { Pokemon } from "@prisma/client";
 import { trpc } from '../_trpc/client';
 import MultiSelectDropdown from "./PokemonType";
-
+import { vercel } from "../_trpc/client";
 
 interface ResponseData {
   pokemons: {
@@ -15,7 +15,7 @@ interface ResponseData {
   }[];
 }
 
-const APP_URL : string =  "https://"+process.env.VERCEL_URL 
+const APP_URL : string =  "https://"+vercel+"/" 
 
 const entries :Pokemon[]= [
                 {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},

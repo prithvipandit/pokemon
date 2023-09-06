@@ -2,10 +2,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import React, { useState } from "react";
-
+import { vercel } from "./client";
 import { trpc } from "./client";
 
-const APP_URL : string =  "https://"+process.env.VERCEL_URL ;
+const APP_URL : string =  "https://"+vercel+"/" || "http://localhost:3000/";
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}));
