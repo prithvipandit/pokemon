@@ -15,6 +15,8 @@ interface ResponseData {
   }[];
 }
 
+const APP_URL : string =  process.env.VERCEL_URL || "http://localhost:3000";
+
 const entries :Pokemon[]= [
                 {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},
                 {id:2,name:"Charmander",type:"gross",sprite:"img--"},
@@ -34,6 +36,8 @@ export default function MyList(): React.JSX.Element {
     const handleSelectedTypesChange = (newSelectedTypes: React.SetStateAction<any[]>) => {
       setSelectedTypes(newSelectedTypes);
     };
+
+    useEffect(()=>{console.log("URL CHECK :: ",APP_URL);},[]);
 
     const filteredList=(pokemons:Pokemon[])=>{
 
