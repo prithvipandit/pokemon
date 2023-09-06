@@ -15,7 +15,7 @@ interface ResponseData {
   }[];
 }
 
-const APP_URL : string =  process.env.VERCEL_URL || "http://localhost:3000";
+const APP_URL : string =  "https://"+process.env.VERCEL_URL 
 
 const entries :Pokemon[]= [
                 {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},

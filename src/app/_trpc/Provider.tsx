@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { trpc } from "./client";
 
-const APP_URL : string =  "https://"+process.env.VERCEL_URL || "http://localhost:3000/";
+const APP_URL : string =  "https://"+process.env.VERCEL_URL ;
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}));
