@@ -37,7 +37,14 @@ export default function MyList(): React.JSX.Element {
       setSelectedTypes(newSelectedTypes);
     };
 
-    useEffect(()=>{console.log("URL CHECK :: ",APP_URL);},[]);
+    useEffect(()=>{
+      
+      console.log("URL CHECK :: ",APP_URL);
+      console.log("process.env :: ",process.env);
+
+      console.log("DB URL :: ",process.env.DATABASE_URL,process.env.VERCEL_URL );
+    
+    },[]);
 
     const filteredList=(pokemons:Pokemon[])=>{
 
