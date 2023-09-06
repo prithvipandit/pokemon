@@ -3,7 +3,7 @@ import React ,{useEffect} from 'react';
 import { Container, Grid, Paper } from '@mui/material';
 import Form from './components/addForm';
 import List from './components/displayData';
-
+import { trpc } from './_trpc/client';
 
 
 
@@ -55,7 +55,7 @@ export default function Home() {
             {/* Content for the right section */}
             <div style={{ padding: '16px',height:'450px',display:'flex',justifyContent:'center' }}>
               {/* Add your content here */}
-              <List />
+              <List/>
             </div>
           </Paper>
         </Grid>

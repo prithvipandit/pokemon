@@ -11,7 +11,7 @@ export const getAllPokemons = async()=>{
         console.log("error while fetching data ",err);
         return [];
     }
-}
+};
 
 export const getPokemon = async(id:any)=>{
     try{
@@ -22,7 +22,7 @@ export const getPokemon = async(id:any)=>{
         console.log("error while fetching data ",err);
         return [];
     }
-}
+};
 
 export const getListPokemons = async (ids:any[])=>{
     try{
@@ -36,7 +36,7 @@ export const getListPokemons = async (ids:any[])=>{
         console.log("error while fetching data ",err);
         return [];
     }
-}
+};
 
 export const addPokemon = async(data:Pokemon)=>{
     const response = await fetch('/api/pokemon', {

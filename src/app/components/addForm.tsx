@@ -2,27 +2,43 @@
 
 import React, { useState } from 'react';
 import { Container, Paper, TextField, Button, Grid,Typography } from '@mui/material';
-import {addPokemon} from './pokemonService';
+import { trpc } from '../_trpc/client';
 
 
 export default function Form() {
+
+  const getAllPokemons = trpc.getAllPokemons.useQuery();
+  const addPokm = trpc.addPokemon.useMutation({
+    onSettled:()=>{
+      getAllPokemons.refetch();
+      setEntry1('');
+      setEntry2('');
+      setEntry3('');
+      setEntry4('');
+    }
+  });
+
+
   const [entry1, setEntry1] = useState('');
   const [entry2, setEntry2] = useState('');
   const [entry3, setEntry3] = useState('');
   const [entry4, setEntry4] = useState('');
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async(e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    addPokemon({id:+entry1,name:entry2,type:entry3,sprite:entry4}).then((res)=>{
-        console.log("response ",res);
-        setEntry1('');
-        setEntry2('');
-        setEntry3('');
-        setEntry4('');
-    }).catch((error)=>{
-        console.log("error ",error);
-    });
+    const res = await addPokm.mutate(JSON.stringify({id:+entry1,name:entry2,type:entry3,sprite:entry4}))
+    console.log("add :: ",res);
+
+    // addPokemon({id:+entry1,name:entry2,type:entry3,sprite:entry4}).then((res)=>{
+    //     console.log("response ",res);
+    //     setEntry1('');
+    //     setEntry2('');
+    //     setEntry3('');
+    //     setEntry4('');
+    // }).catch((error)=>{
+    //     console.log("error ",error);
+    // });
   };
 
   return (

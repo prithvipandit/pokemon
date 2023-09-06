@@ -3,7 +3,7 @@ import React ,{useState , useEffect} from "react";
 import { Paper, Container, Typography, Table, TableHead,TableRow, TableBody,TableCell } from "@mui/material";
 import { Pokemon } from "@prisma/client";
 import { getAllPokemons } from "./pokemonService";
-
+import { trpc } from '../_trpc/client';
 
 
 
@@ -16,28 +16,14 @@ const entries :Pokemon[]= [
 
 export default function MyList(): React.JSX.Element {
 
+    const { data, isLoading, isError, error } = trpc.getAllPokemons.useQuery();
+    
     const [list,setList] = useState<Pokemon[]>([]);
 
     useEffect(() => {
-
-        async function pullData(){
-            const res = await getAllPokemons();
-            setList(res);
-            console.log("#response : ",res);
-            console.log("#Updated List : ",list);
-            return res;
-        }
-
-        pullData();
-       
-      }, []);
-
+      console.log('$$ : ',data, isLoading, isError, error);
+    }, []);
     
-
-    
-
-    
-
   return (
     <Container>
         <Typography mt={2} mb={2} variant="h5">list of added pokemons : </Typography>
@@ -51,15 +37,21 @@ export default function MyList(): React.JSX.Element {
             <TableCell>sprite</TableCell>
           </TableRow>
         </TableHead>
+        
         <TableBody>
-          {entries.map((entry) => (
+          { isLoading ? entries.map((entry) => (
             <TableRow key={entry.id}>
               <TableCell>{entry.id}</TableCell>
               <TableCell>{entry.name}</TableCell>
               <TableCell>{entry.type}</TableCell>
               <TableCell>{entry.sprite}</TableCell>
             </TableRow>
-          ))}
+          )) : data?.pokemons.map((entry) => <TableRow key={entry.id}>
+          <TableCell>{entry.id}</TableCell>
+          <TableCell>{entry.name}</TableCell>
+          <TableCell>{entry.type}</TableCell>
+          <TableCell>{entry.sprite}</TableCell>
+        </TableRow>)}
         </TableBody>
       </Table>
       </Paper>
