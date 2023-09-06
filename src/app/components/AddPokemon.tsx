@@ -29,27 +29,17 @@ export default function Form() {
 
     const res = await addPokm.mutate(JSON.stringify({id:+entry1,name:entry2,type:entry3,sprite:entry4}))
     console.log("add :: ",res);
-
-    // addPokemon({id:+entry1,name:entry2,type:entry3,sprite:entry4}).then((res)=>{
-    //     console.log("response ",res);
-    //     setEntry1('');
-    //     setEntry2('');
-    //     setEntry3('');
-    //     setEntry4('');
-    // }).catch((error)=>{
-    //     console.log("error ",error);
-    // });
   };
 
   return (
     <Container>
-        <Typography mb={4} variant="h5" component="h5">add pokemon details : </Typography>
+      <Typography mb={4} variant="h5" component="h5">Add Pokemon : </Typography>
       <Paper elevation={3} style={{ padding: '20px' }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="id (Number)"
+                label="Id (Number)"
                 fullWidth
                 variant="outlined"
                 value={entry1}
@@ -58,7 +48,7 @@ export default function Form() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="name"
+                label="Name"
                 fullWidth
                 variant="outlined"
                 value={entry2}
@@ -67,7 +57,7 @@ export default function Form() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="type"
+                label="Type"
                 fullWidth
                 variant="outlined"
                 value={entry3}
@@ -76,7 +66,7 @@ export default function Form() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="sprite"
+                label="Sprite"
                 fullWidth
                 variant="outlined"
                 value={entry4}

@@ -1,8 +1,16 @@
 import { publicProcedure,router } from "./trpc";
 import { z } from "zod";
-import {  NextResponse } from 'next/server';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Pokemon, Prisma, PrismaClient } from '@prisma/client';
 
+
+interface ResponseData {
+    pokemons: {
+      id: number;
+      name: string;
+      type: string;
+      sprite: string;
+    }[];
+}
 
 const prisma = new PrismaClient();
 
@@ -26,8 +34,8 @@ export const appRouter = router({
     }),
     getAllPokemons: publicProcedure.query(async()=>{
         try{
-            const res = await prisma.pokemon.findMany();
-            return{pokemons:res};
+            const res :Pokemon[] = await prisma.pokemon.findMany();
+            return {pokemons:res};
           }catch(err){
             console.log("error while fetching ",err);
             return {error: err};

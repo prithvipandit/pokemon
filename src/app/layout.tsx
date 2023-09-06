@@ -1,4 +1,3 @@
-import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Provider from './_trpc/Provider'
@@ -22,4 +21,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
+};
