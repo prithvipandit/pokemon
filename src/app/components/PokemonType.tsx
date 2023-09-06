@@ -3,7 +3,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 
-const MultiSelectDropdown = ({ options, selectedOptions, onSelectedOptionsChange }) => {
+interface MultiSelectDropdownProps {
+  options: string[];
+  selectedOptions: string[];
+  onSelectedOptionsChange: (newSelectedOptions: string[]) => void;
+}
+
+const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ options, selectedOptions, onSelectedOptionsChange }) => {
   return (
     <Autocomplete
       multiple

@@ -6,8 +6,16 @@ import { trpc } from '../_trpc/client';
 import MultiSelectDropdown from "./PokemonType";
 
 
+interface ResponseData {
+  pokemons: {
+    id: number;
+    name: string;
+    type: string;
+    sprite: string;
+  }[];
+}
 
-const entries:Pokemon[]= [
+const entries :Pokemon[]= [
                 {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},
                 {id:2,name:"Charmander",type:"gross",sprite:"img--"},
                 {id:3,name:"Pikachu",type:"gross",sprite:"img--"}
@@ -16,7 +24,10 @@ const entries:Pokemon[]= [
 
 export default function MyList(): React.JSX.Element {
 
-    const { data, isLoading } = trpc.getAllPokemons.useQuery();
+    const { data, isLoading } = trpc.getAllPokemons.useQuery() as {
+      data : ResponseData,
+      isLoading : Boolean
+    };
     const availableTypes = ['gross','angry','fire'];
     const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
     
@@ -69,7 +80,7 @@ export default function MyList(): React.JSX.Element {
               <TableCell>[{entry.type}]</TableCell>
               <TableCell>{entry.sprite}</TableCell>
             </TableRow>
-          )) : filteredList(data?.pokemons).map((entry) => <TableRow key={entry.id}>
+          )) : filteredList(data.pokemons).map((entry) => <TableRow key={entry.id}>
           
           <TableCell>{entry.name}</TableCell>
           <TableCell>[{entry.type}]</TableCell>
@@ -97,12 +108,14 @@ export default function MyList(): React.JSX.Element {
               <TableCell>[{entry.type}]</TableCell>
               <TableCell>{entry.sprite}</TableCell>
             </TableRow>
-          )) : data?.pokemons.map((entry) => <TableRow key={entry.id}>
+          )) :  
           
-          <TableCell>{entry.name}</TableCell>
-          <TableCell>[{entry.type}]</TableCell>
-          <TableCell>{entry.sprite}</TableCell>
-        </TableRow>)}
+          data.pokemons.map((entry) => 
+          <TableRow key={entry.id}>
+            <TableCell>{entry.name}</TableCell>
+            <TableCell>[{entry.type}]</TableCell>
+            <TableCell>{entry.sprite}</TableCell>
+          </TableRow>)}
         </TableBody>
       </Table>
       </Paper></> }

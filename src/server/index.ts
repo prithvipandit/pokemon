@@ -35,7 +35,8 @@ export const appRouter = router({
     getAllPokemons: publicProcedure.query(async()=>{
         try{
             const res :Pokemon[] = await prisma.pokemon.findMany();
-            return {pokemons:res};
+            const pokemons: ResponseData= { pokemons : res};
+            return pokemons;
           }catch(err){
             console.log("error while fetching ",err);
             return {error: err};
