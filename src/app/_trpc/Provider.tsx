@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { trpc } from "./client";
 
-const APP_URL : string =  process.env.APP_URL || "http://localhost:3000";
+const APP_URL : string =  "https://"+process.env.VERCEL_URL || "http://localhost:3000/";
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}));
@@ -13,7 +13,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `${APP_URL}/api/trpc`
+          url: `${APP_URL}api/trpc`
         }),
       ],
     })
