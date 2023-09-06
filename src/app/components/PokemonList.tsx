@@ -4,7 +4,7 @@ import { Paper, Container, Typography, Table, TableHead,TableRow, TableBody,Tabl
 import { Pokemon } from "@prisma/client";
 import { trpc } from '../_trpc/client';
 import MultiSelectDropdown from "./PokemonType";
-import { vercel } from "../_trpc/client";
+import { vercel } from "@/server/trpc";
 
 interface ResponseData {
   pokemons: {

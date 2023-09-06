@@ -1,6 +1,6 @@
 import { httpBatchLink } from "@trpc/client";
 import { appRouter } from "@/server";
-import { vercel } from "./client";
+import { vercel } from "@/server/trpc";
 
 const APP_URL : string =  "https://"+vercel+"/" || "http://localhost:3000/";
 
