@@ -4,7 +4,7 @@ import { Paper, Container, Typography, Table, TableHead,TableRow, TableBody,Tabl
 import { Pokemon } from "@prisma/client";
 import { trpc } from '../_trpc/client';
 import MultiSelectDropdown from "./PokemonType";
-import { vercel } from "@/server/trpc";
+
 
 interface ResponseData {
   pokemons: {
@@ -15,7 +15,6 @@ interface ResponseData {
   }[];
 }
 
-const APP_URL : string =  "https://"+vercel+"/" 
 
 const entries :Pokemon[]= [
                 {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},
@@ -38,13 +37,17 @@ export default function MyList(): React.JSX.Element {
     };
 
     useEffect(()=>{
-      
-      console.log("URL CHECK :: ",APP_URL);
-      console.log("process.env :: ",process.env);
+      const fetchDataFromApi=async ()=> {
+        const response = await fetch('/api/data');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return await response.json();
+      }
 
-      console.log("DB URL :: ",process.env.DATABASE_URL,process.env.VERCEL_URL );
-
-      
+      fetchDataFromApi().then((data)=>{
+        console.log("data fetched ",data.url);
+      });
     
     },[]);
 
@@ -54,7 +57,6 @@ export default function MyList(): React.JSX.Element {
       
       pokemons.forEach((pokemon)=>{
         for(const typo in selectedTypes){
-          console.log("#",typo);
           if(pokemon.type.includes(selectedTypes[typo])){
             filteredData.push(pokemon);
             break;

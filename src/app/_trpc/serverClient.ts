@@ -1,13 +1,22 @@
 import { httpBatchLink } from "@trpc/client";
 import { appRouter } from "@/server";
-import { vercel } from "@/server/trpc";
 
-const APP_URL : string =  "https://"+vercel+"/" || "http://localhost:3000/";
 
-export const serverClient = appRouter.createCaller({
-  links: [
-    httpBatchLink({
-      url: `${APP_URL}api/trpc`,
-    }),
-  ],
+const APP_URL= async()=> {
+  const response = await fetch('/api/data');
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const data = await response.json();
+  return data.url;
+}
+
+export const serverClient = APP_URL().then((url)=>{
+  return appRouter.createCaller({
+    links: [
+      httpBatchLink({
+        url: `${url}api/trpc`,
+      }),
+    ],
+  })
 });
