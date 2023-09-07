@@ -55,7 +55,7 @@ export default function MyList(): React.JSX.Element {
 
       let filteredData :Pokemon[] = [];
       
-      pokemons.forEach((pokemon)=>{
+      pokemons?.forEach((pokemon)=>{
         for(const typo in selectedTypes){
           if(pokemon.type.includes(selectedTypes[typo])){
             filteredData.push(pokemon);
@@ -95,7 +95,7 @@ export default function MyList(): React.JSX.Element {
               <TableCell>[{entry.type}]</TableCell>
               <TableCell>{entry.sprite}</TableCell>
             </TableRow>
-          )) : filteredList(data.pokemons).map((entry) => <TableRow key={entry.id}>
+          )) : filteredList(data.pokemons)?.map((entry) => <TableRow key={entry.id}>
           
           <TableCell>{entry.name}</TableCell>
           <TableCell>[{entry.type}]</TableCell>
@@ -125,7 +125,7 @@ export default function MyList(): React.JSX.Element {
             </TableRow>
           )) :  
           
-          data.pokemons.map((entry) => 
+          data.pokemons?.map((entry) => 
           <TableRow key={entry.id}>
             <TableCell>{entry.name}</TableCell>
             <TableCell>[{entry.type}]</TableCell>
