@@ -17,9 +17,9 @@ interface ResponseData {
 
 
 const entries :Pokemon[]= [
-                {id:1,name:"Bulbasaur",type:"gross",sprite:"img--"},
-                {id:2,name:"Charmander",type:"gross",sprite:"img--"},
-                {id:3,name:"Pikachu",type:"gross",sprite:"img--"}
+                {id:1,name:"Bulbasaur",type:"gross",sprite:"ig.--"},
+                {id:2,name:"Charmander",type:"fire",sprite:"ig.--"},
+                {id:3,name:"Pikachu",type:"angry",sprite:"ig.--"}
               ];
 
 
@@ -89,7 +89,7 @@ export default function MyList(): React.JSX.Element {
         </TableHead>
         
         <TableBody>
-          { true ? entries.map((entry) => (
+          { true ? filteredList(entries).map((entry) => (
             <TableRow key={entry.id}>
               
               <TableCell>{entry.name}</TableCell>
@@ -117,7 +117,7 @@ export default function MyList(): React.JSX.Element {
         </TableHead>
         
         <TableBody>
-          { isLoading ? entries.map((entry) => (
+          { true? entries.map((entry) => (
             <TableRow key={entry.id}>
               
               <TableCell>{entry.name}</TableCell>
