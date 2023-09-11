@@ -25,9 +25,7 @@ export default function Form() {
 
   const handleSubmit = async(e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
-    const res = await addPokm.mutate(JSON.stringify({id:+entry1,name:entry2,type:entry3,sprite:entry4}))
-    console.log("add :: ",res);
+    const res = await addPokm.mutate(JSON.stringify({id:+entry1,name:entry2,type:entry3,sprite:entry4}));
   };
 
   return (

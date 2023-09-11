@@ -30,7 +30,7 @@ export default function MyList(): React.JSX.Element {
       isLoading : Boolean
     };
     const availableTypes = ['gross','angry','fire'];
-    const [selectedTypes, setSelectedTypes] = useState<any[]>([]);
+    const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     
     const handleSelectedTypesChange = (newSelectedTypes: React.SetStateAction<any[]>) => {
       setSelectedTypes(newSelectedTypes);
@@ -46,7 +46,7 @@ export default function MyList(): React.JSX.Element {
       }
 
       fetchDataFromApi().then((data)=>{
-        console.log("data fetched ",data.url);
+        // console.log("data fetched ",data.url);
       });
     
     },[]);
@@ -70,6 +70,7 @@ export default function MyList(): React.JSX.Element {
   return (
     <Container>
       <MultiSelectDropdown
+        someKey="123"
         options={availableTypes}
         selectedOptions={selectedTypes}
         onSelectedOptionsChange={handleSelectedTypesChange}
@@ -88,7 +89,7 @@ export default function MyList(): React.JSX.Element {
         </TableHead>
         
         <TableBody>
-          { isLoading ? entries.map((entry) => (
+          { true ? entries.map((entry) => (
             <TableRow key={entry.id}>
               
               <TableCell>{entry.name}</TableCell>
